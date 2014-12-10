@@ -5,9 +5,6 @@ if (Meteor.isClient) {
 
     Template.scoreButton.events({
         'click button': function () {
-            // increment the counter when button is clicked
-            //Session.set("counter", Session.get("counter") + 1);
-            //var score = Session.get("counter");
             Meteor.call('incrementScore');
         }
     });
@@ -40,10 +37,7 @@ if (Meteor.isServer) {
     //Meteor.loginVisitor();
     Meteor.publish('allUsers', function() {
         // publish a list of all users reverse-sorted by score
-        return Meteor.users.find(
-                {},
-                {sort: {'profile.score': -1 }}
-            );
+        return Meteor.users.find();
     });
 
     Meteor.startup(function () {
