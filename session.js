@@ -41,14 +41,14 @@ if (Meteor.isServer) {
     Meteor.methods({
         incrementScore: function (score) {
             console.log('Increment score: ' + Meteor.userId());
-            //      Meteor.users.update(
-            //          { _id: Meteor.userId() },
-            //          { $inc: { 'score': 1 } }
-            //      );
-            Meteor.users.update(
-                { _id: Meteor.userId() },
-                { $set: { 'profile.score': score } }
-            );
+                  Meteor.users.update(
+                      { _id: Meteor.userId() },
+                      { $inc: { 'profile.score': 1 } }
+                  );
+//            Meteor.users.update(
+//                { _id: Meteor.userId() },
+//                { $set: { 'profile.score': score } }
+//            );
         }
     });
 }
