@@ -17,6 +17,10 @@ if (Meteor.isClient) {
             Session.set("counter", Session.get("counter") + 1);
             var score = Session.get("counter");
             Meteor.call('incrementScore');
+        },
+        'keyup #name': function (event) {
+            var username = event.target.value;
+            Meteor.call('changeUserName', username);
         }
     });
 
@@ -41,14 +45,20 @@ if (Meteor.isServer) {
     Meteor.methods({
         incrementScore: function () {
             console.log('Increment score: ' + Meteor.userId());
-                  Meteor.users.update(
-                      { _id: Meteor.userId() },
-                      { $inc: { 'profile.score': 1 } }
-                  );
-//            Meteor.users.update(
-//                { _id: Meteor.userId() },
-//                { $set: { 'profile.score': score } }
-//            );
+            Meteor.users.update(
+                { _id: Meteor.userId() },
+                { $inc: { 'profile.score': 1 } }
+            );
+            //            Meteor.users.update(
+            //                { _id: Meteor.userId() },
+            //                { $set: { 'profile.score': score } }
+            //            );
+        },
+        changeUserName: function (username) {
+            Meteor.users.update(
+                { _id: Meteor.userId() },
+                { $set: { 'username': username } }
+            );
         }
     });
 }

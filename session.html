@@ -1,27 +1,31 @@
 <head>
-  <title>session</title>
+    <title>session</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+    <h1>Welcome to Meteor!</h1>
 
-  {{> hello}}
-  {{> allUsers }}
+    {{> hello}}
+    {{> allUsers }}
 </body>
 
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+    <fieldgroup>
+        <label for="name">Enter your name</label>
+        <input type="text" id="name" name="name"/>
+    </fieldgroup>
+    <br />
+    <button>Click Me</button>
 </template>
 
 <template name="allUsers">
-<ul>
-  {{# each users }}
-   <li> {{> singleUser }} </li>
-  {{/ each }}
-</ul>
+    <ul>
+        {{# each users }}
+        <li> {{> singleUser }} </li>
+        {{/ each }}
+    </ul>
 </template>
 
 <template name="singleUser">
- {{ username }} (Score: {{ profile.score }})
+    {{ username }} (Score: {{ profile.score }})
 </template>
