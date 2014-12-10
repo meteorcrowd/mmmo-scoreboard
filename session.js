@@ -66,14 +66,6 @@ if (Meteor.isServer) {
                 { _id: Meteor.userId() },
                 { $set: { 'username': username } }
             );
-        },
-        getUserName: function () {
-            'use strict';
-            // Get the username of the current user
-            var userId = Meteor.userId(),
-                user = Meteor.users.find(userId).fetch(),
-                username = user[0].username;
-            return username;
         }
     });
 }
