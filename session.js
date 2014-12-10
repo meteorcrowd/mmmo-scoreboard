@@ -1,17 +1,9 @@
 if (Meteor.isClient) {
-    // counter starts at 0
-    Session.setDefault("counter", 0);
-
     // Create an anonymous user
     Meteor.loginVisitor();
+    Meteor.subscribe('allUsers');
 
-    Template.hello.helpers({
-        counter: function () {
-            return Session.get("counter");
-        }
-    });
-
-    Template.hello.events({
+    Template.scoreButton.events({
         'click button': function () {
             // increment the counter when button is clicked
             //Session.set("counter", Session.get("counter") + 1);
@@ -22,20 +14,23 @@ if (Meteor.isClient) {
 
     Template.allUsers.helpers({
         users: function () {
+            // Get a list of all users
             return Meteor.users.find(
                 {},
-                {sort: {'profile.score': -1 }}
+                { sort: { 'profile.score': -1 } }
             ).fetch();
         }
     });
     Template.userName.events({
         'keyup #name': function (event) {
+            // Set the current username in the database
             var username = event.target.value;
             Meteor.call('changeUserName', username);
         }
     });
     Template.userName.helpers({
         username: function () {
+            // Return the current username into the template
             var username = Meteor.call('getUserName');
             console.log('username is: ' + username);
         }
@@ -44,6 +39,14 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     //Meteor.loginVisitor();
+    Meteor.publish('allUsers', function() {
+        // publish a list of all users reverse-sorted by score
+        return Meteor.users.find(
+                {},
+                {sort: {'profile.score': -1 }}
+            ).fetch();
+    });
+
     Meteor.startup(function () {
         // code to run on server at startup
     });
@@ -58,19 +61,17 @@ if (Meteor.isServer) {
         },
         // Change username to a given value
         changeUserName: function (username) {
+            // Change the username of the current user
             Meteor.users.update(
                 { _id: Meteor.userId() },
                 { $set: { 'username': username } }
             );
         },
-        // retrieve the username
         getUserName: function () {
+            // Get the username of the current user
             var userId = Meteor.userId();
-            console.log('user ID: ' + userId);
             var user = Meteor.users.find(userId).fetch();
-            console.log('user: ' + user);
             var username = user[0].username;
-            console.log("username: " + username);
             return username;
         }
     });
