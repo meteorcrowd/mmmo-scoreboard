@@ -1,31 +1,42 @@
 <head>
-    <title>session</title>
+    <title>Meteor high scores!</title>
 </head>
 
 <body>
-    <h1>Welcome to Meteor!</h1>
-
+    <h1>Meteor high scores!</h1>
+    {{> userName }}
     {{> hello}}
-    {{> allUsers }}
+    {{> highScores }}
 </body>
 
-<template name="hello">
-    <fieldgroup>
+<template name="userName">
+    <div class="input-group">
         <label for="name">Enter your name</label>
-        <input type="text" id="name" name="name"/>
-    </fieldgroup>
-    <br />
-    <button>Click Me</button>
+        <input value="{{ username }}" type="text" id="name" name="name"/>
+    </div>
+</template>
+
+<template name="hello">
+    <button class="btn btn-block btn-lg btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Increase your score</button>
+</template>
+
+<template name="highScores">
+    <div class="panel panel-primary">
+        <div class="panel-heading">High Scores</div>
+        <div class="panel-body">
+            {{> allUsers }}
+        </div>
+    </div>
 </template>
 
 <template name="allUsers">
-    <ul>
+    <ul class="list-group">
         {{# each users }}
-        <li> {{> singleUser }} </li>
+            <li class="list-group-item"> {{> singleUser }} </li>
         {{/ each }}
     </ul>
 </template>
 
 <template name="singleUser">
-    {{ username }} (Score: {{ profile.score }})
+    {{ username }} <span class="badge">{{ profile.score }}</span>
 </template>

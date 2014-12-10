@@ -4,10 +4,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 dcsan:accounts-guest
 accounts-base
 accounts-password
 mizzao:bootstrap-3
+autopublish
 
