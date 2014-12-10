@@ -5,13 +5,14 @@ if (Meteor.isClient) {
 
     Template.scoreButton.events({
         'click button': function () {
+            // Increment player score
             Meteor.call('incrementScore');
         }
     });
 
     Template.allUsers.helpers({
         users: function () {
-            // Get a list of all users
+            // Get a list of all users, sorted in reverse-order by score
             return Meteor.users.find(
                 {},
                 { sort: { 'profile.score': -1 } }
@@ -34,9 +35,9 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-    //Meteor.loginVisitor();
+    //Meteor.loginVisitor(); // If enabled, will periodically clear user database
     Meteor.publish('allUsers', function() {
-        // publish a list of all users reverse-sorted by score
+        // publish a list of all users
         return Meteor.users.find();
     });
 
@@ -52,7 +53,6 @@ if (Meteor.isServer) {
                 { $inc: { 'profile.score': 1 } }
             );
         },
-        // Change username to a given value
         changeUserName: function (username) {
             // Change the username of the current user
             Meteor.users.update(
