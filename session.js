@@ -31,8 +31,7 @@ if (Meteor.isClient) {
     Template.userName.helpers({
         username: function () {
             // Return the current username into the template
-            var username = Meteor.call('getUserName');
-            console.log('username is: ' + username);
+            return Meteor.users.find(Meteor.userId()).fetch()[0].username;
         }
     });
 }
