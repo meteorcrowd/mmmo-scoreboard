@@ -16,7 +16,7 @@ if (Meteor.isClient) {
             // increment the counter when button is clicked
             Session.set("counter", Session.get("counter") + 1);
             var score = Session.get("counter");
-            Meteor.call('incrementScore', score);
+            Meteor.call('incrementScore');
         }
     });
 
@@ -34,12 +34,12 @@ if (Meteor.isServer) {
         // code to run on server at startup
     });
 
-    // add method to set user name
+    // TODO: add method to set user name
     //Meteor.
 
     // method to set user score in db
     Meteor.methods({
-        incrementScore: function (score) {
+        incrementScore: function () {
             console.log('Increment score: ' + Meteor.userId());
                   Meteor.users.update(
                       { _id: Meteor.userId() },
