@@ -46,10 +46,6 @@ if (Meteor.isServer) {
         return Meteor.users.find();
     });
 
-//    Meteor.startup(function () {
-//        // code to run on server at startup
-//    });
-
     Meteor.methods({
         // Increment the score by one
         incrementScore: function () {
