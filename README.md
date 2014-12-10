@@ -1,4 +1,4 @@
-Meteor massively multiplayer scoreboard
+Meteor massively multiplayer online scoreboard
 ===================
 Compete with people around the world for the top ranking position on scoreboard!
 
