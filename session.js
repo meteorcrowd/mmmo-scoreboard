@@ -43,7 +43,7 @@ if (Meteor.isServer) {
         return Meteor.users.find(
                 {},
                 {sort: {'profile.score': -1 }}
-            ).fetch();
+            );
     });
 
     Meteor.startup(function () {
