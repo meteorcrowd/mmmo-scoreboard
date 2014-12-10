@@ -8,8 +8,8 @@ Host your own scoreboard
 ------------------------
 Having friends over for a LAN party? Bored at the office? Host your own high scores board right away!
 
-- `git clone this repository`
-- cd repository folder
-- `meteor`
-- Share your IP:port with friends
-- Let the fun begin
+1. `git clone this repository`
+1. cd repository folder
+1. `meteor`
+1. Invite your friends
+1. Have some massively multiplayer online fun!
